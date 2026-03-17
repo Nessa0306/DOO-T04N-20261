@@ -98,7 +98,7 @@ public class Principal {
 		float desconto = 0;
 		float discountPercent = 1;
 
-		if (qtdProduto >= 10) {
+		if (qtdProduto > 10) {
 			System.out.println(
 					"Seu pedido ultrapassou a marca de 10 unidades, você acaba de receber um desconto de 5%!");
 			desconto = 0.05f;
@@ -111,9 +111,9 @@ public class Principal {
 		valorComDesconto = qtdProduto * (valorProduto * discountPercent);
 		float valorDesconto = valorSemDesconto - valorComDesconto;
 
-		System.out.printf("O valor total da sua compra foi: " + valorComDesconto);
-		System.out.printf("Valor sem desconto: " + valorSemDesconto);
-		System.out.printf("Valor do desconto: " + valorDesconto);
+		System.out.println("O valor total da sua compra foi: " + valorComDesconto);
+		System.out.println("Valor sem desconto: " + valorSemDesconto);
+		System.out.println("Valor do desconto: " + valorDesconto);
 		
 	}
 
@@ -130,7 +130,7 @@ public class Principal {
 			statusTroco = "Troco a pagar: " + valorTroco;
 		}
 
-		System.out.printf(statusTroco);
+		System.out.println(statusTroco);
 	}
 	
 	public static Venda registrarVenda(float valorProduto, int qtdProduto, LocalDate dataVenda) {
@@ -164,17 +164,17 @@ public class Principal {
 		for (int i = 0; i < vendas.size(); i++) {
 			Venda venda = vendas.get(i);
 			
-			System.out.printf("Venda " + (i + 1));
-			System.out.printf("Valor unitário: " + venda.getValorUnitario());
-            System.out.printf("Valor total: " + venda.getValorTotal());
-            System.out.printf("Desconto: " + venda.getDesconto());
-            System.out.printf("Valor com desconto: " + venda.getValorComDesconto());
+			System.out.println("Venda " + (i + 1));
+			System.out.println("Valor unitário: " + venda.getValorUnitario());
+            System.out.println("Valor total: " + venda.getValorTotal());
+            System.out.println("Desconto: " + venda.getDesconto());
+            System.out.println("Valor com desconto: " + venda.getValorComDesconto());
             
             somaTotal = somaTotal + venda.getValorComDesconto();
 		}
 		
-		System.out.printf("Vendas: " + vendas.size());
-		System.out.printf("Valor total: " + somaTotal);
+		System.out.println("Vendas: " + vendas.size());
+		System.out.println("Valor total: " + somaTotal);
 	}
 			
 	public static void buscarVendaPorDia() {
@@ -193,9 +193,9 @@ public class Principal {
 			}
 		}
 	
-		System.out.printf("Data pesquisada: " + dataBusca.format(formatter));
-		System.out.printf("Quantidade de vendas: " + quantidadeVendas);
-		System.out.printf("Total vendido no dia: " + totalVendido);
+		System.out.println("Data pesquisada: " + dataBusca.format(formatter));
+		System.out.println("Quantidade de vendas: " + quantidadeVendas);
+		System.out.println("Total vendido no dia: " + totalVendido);
 	}
 
 	public static void buscarVendaPorMes() {
@@ -217,7 +217,7 @@ public class Principal {
 		}
 
 		System.out.printf("Data pesquisada: %02d/%d%n", mes, ano);
-		System.out.printf("Total de vendas feita nesse período: " + quantidadeDeVendas);
-		System.out.printf("Total vendido nesse período: " + totalVendido);
+		System.out.println("Total de vendas feita nesse período: " + quantidadeDeVendas);
+		System.out.println("Total vendido nesse período: " + totalVendido);
 	}
 }
