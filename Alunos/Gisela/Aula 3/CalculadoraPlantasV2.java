@@ -82,4 +82,3 @@ public class CalculadoraPlantas {
         }while (opcao != 4);
         sc.close();
     }
-}
