@@ -1,4 +1,4 @@
-package atividade02vendas;
+package classesAtividade;
 
 public class Troco {
 	public double ValorPago;
