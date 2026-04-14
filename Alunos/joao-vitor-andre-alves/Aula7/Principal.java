@@ -1,14 +1,7 @@
-package loja_gabrielinha;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import objects.Cliente;
-import objects.Loja;
-import objects.Vendedor;
-import objetos.Venda;
 
 public class Principal {
 
@@ -19,6 +12,7 @@ public class Principal {
 	static ArrayList<Cliente> clientes = new ArrayList<>();
 	static ArrayList<Vendedor> vendedores = new ArrayList<>();
 	static ArrayList<Loja> lojas = new ArrayList<>();
+	static ArrayList<Pedido> pedidos = new ArrayList<>();
 
 	public static void main(String[] args) {
 		chamarMenu();
@@ -37,6 +31,7 @@ public class Principal {
 			System.out.println("[5] - Buscar venda por dia");
 			System.out.println("[6] - Buscar venda por mês");
 			System.out.println("[7] - Módulo de RH");
+			System.out.println("[8] - Criar Pedido");
 			System.out.println("[0] - Sair");
 
 			escolhaUsuarioMenu = scan.nextInt();
@@ -104,6 +99,10 @@ public class Principal {
 				chamarModuloRH();
 				break;
 
+			case 8:
+				criarPedido();
+				break;
+
 			case 0:
 				System.out.println("Encerrando a execução do MyPlant. Obrigado por comprar conosco!");
 				break;
@@ -119,7 +118,8 @@ public class Principal {
 		float discountPercent = 1;
 
 		if (qtdProduto > 10) {
-			System.out.println("Seu pedido ultrapassou a marca de 10 unidades, você acaba de receber um desconto de 5%!");
+			System.out
+					.println("Seu pedido ultrapassou a marca de 10 unidades, você acaba de receber um desconto de 5%!");
 			desconto = 0.05f;
 			discountPercent = 1 - desconto;
 		}
@@ -430,13 +430,55 @@ public class Principal {
 		System.out.println("Rua:");
 		loja.setRua(scan.nextLine());
 
-		// inicialmente sem clientes e vendedores cadastrados dentro da loja, necessario rodar o sistema e inserir pra ter os resultados
-		loja.setClientes(new ArrayList<Cliente>());
-		loja.setVendedores(new ArrayList<Vendedor>());
+		// inicialmente sem clientes e vendedores cadastrados dentro da loja, necessario
+		// rodar o sistema e inserir pra ter os resultados
+		loja.setClientes(new Cliente[0]);
+		loja.setVendedores(new Vendedor[0]);
 
 		lojas.add(loja);
 
 		System.out.println("Loja cadastrada com sucesso!");
+	}
+
+	public static void criarPedido() {
+		if (clientes.isEmpty() || vendedores.isEmpty() || lojas.isEmpty()) {
+			System.out.println(
+					"É necessário ter pelo menos um cliente, vendedor e loja cadastrados para criar um pedido.");
+			return;
+		}
+
+		ProcessaPedido processaPedido = new ProcessaPedido();
+
+		// Dados fake
+		int id = pedidos.size() + 1;
+		LocalDate dataCriacao = LocalDate.now();
+		LocalDate dataVencimentoReserva = LocalDate.now().plusDays(7);
+
+		Cliente cliente = clientes.get(0); // Primeiro cliente
+		Vendedor vendedor = vendedores.get(0); // Primeiro vendedor
+		Loja loja = lojas.get(0); // Primeira loja
+
+		ArrayList<Item> itens = new ArrayList<>();
+		Item item1 = new Item();
+		item1.setId(1);
+		item1.setNome("Planta Fake 1");
+		item1.setTipo("Planta");
+		item1.setValor(50.0f);
+		itens.add(item1);
+
+		Item item2 = new Item();
+		item2.setId(2);
+		item2.setNome("Planta Fake 2");
+		item2.setTipo("Planta");
+		item2.setValor(30.0f);
+		itens.add(item2);
+
+		Pedido pedido = processaPedido.processar(id, dataCriacao, dataVencimentoReserva, cliente, vendedor, loja,
+				itens);
+		pedidos.add(pedido);
+
+		System.out.println("Pedido criado com sucesso!");
+		pedido.gerarDescricaoVenda();
 	}
 
 }
