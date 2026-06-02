@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Show {
 	//ArrayList<Show> show = new ArrayList<>();
+	int id;
 	String name;
 	String language;
 	ArrayList<String> genres = new ArrayList<>();
@@ -86,5 +87,26 @@ public class Show {
 
 	public void setNetwork(ArrayList<Network> network) {
 		this.network = network;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String Emissora() {
+		if(getNetwork()!=null) {
+			return getNetwork().get(0).getEmissora().toString();
+		} else {
+			return "não televisionado";
+		}
+	}
+	
+	public String sla() {
+		return "Nome: " + getName() + ", Idioma: " + getLanguage() + ", Genero: " + getGenres() + ", Avaliação: " + getRating().get(0).getAverage() 
+				+ ", Status: " + getStatus() + ", Data de Estreia: " + getPremiered() + ", Data de Encerramento:" + getEnded() + ", Emissora: " + Emissora();
 	}
 }

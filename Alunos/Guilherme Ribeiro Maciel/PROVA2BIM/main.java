@@ -42,10 +42,9 @@ import java.util.List;
 public class main {
 
 	static Scanner scan = new Scanner(System.in);
-	static List<Series> series = new ArrayList<Series>();
 	
 	public static void main(String[] args) {
-		Consulta();
+		ConsultaUnica();
 	}
 
 	private static void Consulta() {
@@ -54,7 +53,6 @@ public class main {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 			mapper.registerModule(new JavaTimeModule());
-			Series series = new Series();
 		
 			HttpClient client = HttpClient.newHttpClient();
 		
@@ -75,6 +73,35 @@ public class main {
 				for (int i = 0; i < series1.length; i++) {
 					System.out.println(series1[i].resumo());
 				}
+			}
+		} catch (URISyntaxException | IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private static void ConsultaUnica() {
+		try {
+			String serie = scan.nextLine();
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+			mapper.registerModule(new JavaTimeModule());
+			
+			HttpClient client = HttpClient.newHttpClient();
+			
+			String params = URLEncoder.encode(serie);
+			URI url = new URI("https://api.tvmaze.com/shows/" + params);
+			
+			HttpRequest request = HttpRequest.newBuilder(url)
+					.GET()
+					.build();
+			
+			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+			
+			if(response.statusCode() == 200) {
+				System.out.println(response.body());
+				String json = response.body();
+				Show series1 = mapper.readValue(json, Show.class);
+				System.out.println(series1.sla());
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
