@@ -75,7 +75,6 @@ public class main {
 		if(jsonArquivo.getUsuario()==null) {
 			TelaIniciar();
 		}
-		TelaPrincipal();
 	}
 
 	private static void TelaPrincipal() {
@@ -348,13 +347,15 @@ public class main {
 				String json = response.body();
 				//por estarmos recebendo uma array de shows precisamos que a desserialização ocorra dentro de uma array tambem
 				series = mapper.readValue(json, Series[].class);
+				/*
 				for(int i = 0; i < series.length; i++) {
 					System.out.println(series[i].resumo());
 				}
+				*/
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorMessage(e.getMessage());
 		}
 	}
 	
@@ -388,7 +389,7 @@ public class main {
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorMessage(e.getMessage());
 		}
 	}
 
@@ -398,27 +399,35 @@ public class main {
 		
 		JPanel dados = new JPanel();
 		JTextField nome = new JTextField();
+		nome.setPreferredSize(new Dimension(100, 25));
 		JLabel info = new JLabel("Insira seu nome aqui:");
 		JButton iniciar = new JButton("Iniciar");
 		dados.add(info);
 		dados.add(nome);
 		dados.add(iniciar);
+
+		iniciando.add(dados);
+		iniciando.setVisible(true);
 		
 		iniciar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e1) {
-				try {
-					PegarNome(nome.getText());
-				} catch (JsonProcessingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				
+				if(!nome.getText().isEmpty()) {
+					try {
+						PegarNome(nome.getText());
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					TelaPrincipal();
+					iniciando.dispose();
+				} else {
+					ErrorMessage("Digite um Nome de Usario Valido");
 				}
-				iniciando.setVisible(false);
 			}
 		});
 		
-		iniciando.add(dados);
-		iniciando.setVisible(true);
 	}
 	
 	private static void ConsultarArquivo() {
@@ -432,13 +441,13 @@ public class main {
 			TelaIniciar();
 		} catch (StreamReadException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorMessage(e.getMessage());
 		} catch (DatabindException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorMessage(e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorMessage(e.getMessage());
 		}
 		
 	}
@@ -452,7 +461,11 @@ public class main {
 		try {
 			Files.writeString(caminhoArquivo, json);
 		}catch (IOException e) {
-			System.out.println(e.getMessage());
+			ErrorMessage(e.getMessage());
 		}
+	}
+	
+	public static void ErrorMessage(String message) {
+		JOptionPane.showMessageDialog(null, message, "Erro não esperado", JOptionPane.ERROR_MESSAGE);
 	}
 }
