@@ -166,6 +166,32 @@ public class main {
 						if (!source.isRowSelected(row)) {
                             source.changeSelection(row, column, false, false);
                         }
+						
+						fav.setEnabled(true);
+						assistidas.setEnabled(true);
+						witchlist.setEnabled(true);
+						del.setEnabled(false);
+                        
+                        popupMenu.show(e.getComponent(), e.getX(), e.getY());
+					}
+				}
+			});
+			
+			tabela1.addMouseListener(new MouseAdapter() {
+				public void mouseReleased(MouseEvent e) {
+					if(e.isPopupTrigger() && e.getComponent() instanceof JTable) {
+						JTable source = (JTable) e.getComponent();
+						int row = source.rowAtPoint(e.getPoint());
+						int column = source.columnAtPoint(e.getPoint());
+						
+						if (!source.isRowSelected(row)) {
+                            source.changeSelection(row, column, false, false);
+                        }
+						
+						fav.setEnabled(false);
+						assistidas.setEnabled(false);
+						witchlist.setEnabled(false);
+						del.setEnabled(true);
                         
                         popupMenu.show(e.getComponent(), e.getX(), e.getY());
 					}
@@ -178,7 +204,7 @@ public class main {
 				if (linhaSelecionada != -1) {
 					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
 					
-					int id = (int) modelo.getValueAt(serieDados, 0);
+					Long id = (Long) modelo.getValueAt(serieDados, 0);
 					
 					SalvarSerie(id, 1);
 				}
@@ -190,7 +216,7 @@ public class main {
 				if (linhaSelecionada != -1) {
 					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
 					
-					int id = (int) modelo.getValueAt(serieDados, 0);
+					Long id = (Long) modelo.getValueAt(serieDados, 0);
 					
 					SalvarSerie(id, 2);
 				}
@@ -202,7 +228,7 @@ public class main {
 				if (linhaSelecionada != -1) {
 					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
 					
-					int id = (int) modelo.getValueAt(serieDados, 0);
+					Long id = (Long) modelo.getValueAt(serieDados, 0);
 					
 					SalvarSerie(id, 3);
 				}
@@ -361,7 +387,7 @@ public class main {
 		}
 	}
 	
-	private static void SalvarSerie(int serie, int lista) {
+	private static void SalvarSerie(Long serie, int lista) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
@@ -384,10 +410,18 @@ public class main {
 				//como estamos recebendo apenas o show em si podemos desserializa-lo diretamente no objeto Show
 				Show serie1 = mapper.readValue(json, Show.class);
 				serie1.setLista(lista);
-				//System.out.println(serie1.sla());
-				jsonArquivo.setSeries1(serie1);
-				String jsonArchive = mapper.writeValueAsString(jsonArquivo);
-				Files.writeString(caminhoArquivo, jsonArchive);
+				
+				boolean jaExiste = jsonArquivo.getSeries().stream()
+				        .anyMatch(s -> s.getId().equals(serie1.getId()));
+				
+				if(jaExiste) {
+					ErrorMessage("essa serie ja foi salva nessa lista");
+				} else {
+					jsonArquivo.setSeries1(serie1);
+					String jsonArchive = mapper.writeValueAsString(jsonArquivo);
+					Files.writeString(caminhoArquivo, jsonArchive);
+					System.out.println("serie foi adicionada a lista");
+				}
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -467,7 +501,7 @@ public class main {
 		}
 	}
 	
-	public static void ErrorMessage(String message) {
+	private static void ErrorMessage(String message) {
 		JOptionPane.showMessageDialog(null, message, "Erro não esperado", JOptionPane.ERROR_MESSAGE);
 	}
 }

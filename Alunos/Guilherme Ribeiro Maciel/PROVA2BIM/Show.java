@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Show {
 	//ArrayList<Show> show = new ArrayList<>();
-	private int id;
+	private Long id;
 	private String name;
 	private String language;
 	private ArrayList<String> genres = new ArrayList<>();
@@ -99,11 +99,11 @@ public class Show {
 		this.network = network;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
