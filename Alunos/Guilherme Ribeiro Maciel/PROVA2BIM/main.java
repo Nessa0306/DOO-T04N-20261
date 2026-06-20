@@ -72,7 +72,7 @@ public class main {
 	
 	public static void main(String[] args) {
 		ConsultarArquivo();
-		if(jsonArquivo.getUsuario().isEmpty() || jsonArquivo.getUsuario()==null) {
+		if(jsonArquivo.getUsuario()==null || jsonArquivo.getUsuario().isEmpty()) {
 			TelaIniciar();
 		} else {
 			TelaPrincipal();
@@ -232,6 +232,21 @@ public class main {
 					
 					SalvarSerie(id, 3);
 				}
+			});
+			
+			del.addActionListener(e -> {
+				int linhaSelecionada = tabela.getSelectedRow();
+				
+				if (linhaSelecionada != -1) {
+					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
+					
+					jsonArquivo.getSeries().remove(serieDados);
+					
+					salvarArquivo();
+				}
+				
+				telas.revalidate();
+		        telas.repaint();
 			});
 			
 			pesquisar.addActionListener(new ActionListener() {
@@ -418,12 +433,31 @@ public class main {
 					ErrorMessage("essa serie ja foi salva nessa lista");
 				} else {
 					jsonArquivo.setSeries1(serie1);
-					String jsonArchive = mapper.writeValueAsString(jsonArquivo);
-					Files.writeString(caminhoArquivo, jsonArchive);
-					System.out.println("serie foi adicionada a lista");
+					salvarArquivo();
 				}
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			ErrorMessage(e.getMessage());
+		}
+	}
+	
+	private static void salvarArquivo() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
+		mapper.registerModule(new JavaTimeModule());
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		String jsonArchive = null;
+		try {
+			jsonArchive = mapper.writeValueAsString(jsonArquivo);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			ErrorMessage(e.getMessage());
+		}
+		try {
+			Files.writeString(caminhoArquivo, jsonArchive);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			ErrorMessage(e.getMessage());
 		}
@@ -450,20 +484,15 @@ public class main {
 			public void actionPerformed(ActionEvent e1) {
 				
 				if(!nome.getText().isEmpty()) {
-					try {
-						PegarNome(nome.getText());
-					} catch (JsonProcessingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					TelaPrincipal();
+					jsonArquivo.setUsuario(nome.getText());
+					salvarArquivo();
 					iniciando.dispose();
+					TelaPrincipal();
 				} else {
 					ErrorMessage("Digite um Nome de Usario Valido");
 				}
 			}
 		});
-		
 	}
 	
 	private static void ConsultarArquivo() {
@@ -474,7 +503,7 @@ public class main {
 			jsonArquivo = mapper.readValue(reader, Arquivo.class);
 			//System.out.println(jsonArquivo.resumo());
 		} catch (FileNotFoundException e) {
-			TelaIniciar();
+			ErrorMessage("Arquivo Json não encontrado, iniciando um novo...");
 		} catch (StreamReadException e) {
 			// TODO Auto-generated catch block
 			ErrorMessage(e.getMessage());
@@ -486,19 +515,6 @@ public class main {
 			ErrorMessage(e.getMessage());
 		}
 		
-	}
-
-	private static void PegarNome(String nome) throws JsonProcessingException {
-		jsonArquivo.setUsuario(nome);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-		mapper.registerModule(new JavaTimeModule());
-		String json = mapper.writeValueAsString(jsonArquivo);
-		try {
-			Files.writeString(caminhoArquivo, json);
-		}catch (IOException e) {
-			ErrorMessage(e.getMessage());
-		}
 	}
 	
 	private static void ErrorMessage(String message) {
