@@ -23,14 +23,12 @@ public final class SerieComparators {
         }
     }
 
-    /** Ordem alfabética (case-insensitive, nulos por último). */
     public static Comparator<Serie> porNome() {
         return Comparator.comparing(
                 s -> s.getNome() == null ? "" : s.getNome().toLowerCase(),
                 Comparator.naturalOrder());
     }
 
-    /** Nota geral, da maior para a menor (nulos por último). */
     public static Comparator<Serie> porNota() {
         return (a, b) -> {
             Double na = a.getNotaGeral();
@@ -42,12 +40,10 @@ public final class SerieComparators {
         };
     }
 
-    /** Estado da série, agrupando por descrição. */
     public static Comparator<Serie> porEstado() {
         return Comparator.comparing(s -> s.getStatus().getDescricao());
     }
 
-    /** Data de estreia, da mais recente para a mais antiga (nulos por último). */
     public static Comparator<Serie> porDataEstreia() {
         return (a, b) -> {
             String da = a.getDataEstreia();
@@ -55,7 +51,7 @@ public final class SerieComparators {
             if (da == null && db == null) return 0;
             if (da == null) return 1;
             if (db == null) return -1;
-            return db.compareTo(da); // datas yyyy-MM-dd comparam corretamente como String
+            return db.compareTo(da); // datas yyyy-MM-dd comparam como String
         };
     }
 

@@ -15,9 +15,6 @@ public enum StatusSerie {
         return descricao;
     }
 
-    /**
-     * Converte o status textual da API TVMaze para o enum interno.
-     */
     public static StatusSerie fromApi(String apiStatus) {
         if (apiStatus == null) {
             return DESCONHECIDO;

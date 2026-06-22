@@ -16,7 +16,7 @@ public class ListaPanel extends JPanel {
         setLayout(new BorderLayout(8, 8));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // ---- Topo: ordenação ----
+        //ordenação
         JPanel topo = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topo.add(new JLabel("Ordenar por:"));
         comboOrdenacao = new JComboBox<>(SerieComparators.Criterio.values());
@@ -31,7 +31,7 @@ public class ListaPanel extends JPanel {
 
         add(topo, BorderLayout.NORTH);
 
-        // ---- Centro: tabela ----
+        //tabela
         tableModel = new SerieTableModel();
         tabela = new JTable(tableModel);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -39,7 +39,7 @@ public class ListaPanel extends JPanel {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         add(new JScrollPane(tabela), BorderLayout.CENTER);
 
-        // ---- Base: ações ----
+        //ações
         JPanel base = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton btnDetalhes = new JButton("Ver detalhes");
         JButton btnRemover = new JButton("Remover da lista");
@@ -47,7 +47,7 @@ public class ListaPanel extends JPanel {
         base.add(btnRemover);
         add(base, BorderLayout.SOUTH);
 
-        // ---- Eventos ----
+        //Eventos
         comboOrdenacao.addActionListener(e -> atualizar());
         btnAtualizar.addActionListener(e -> atualizar());
         btnDetalhes.addActionListener(e -> verDetalhes());
@@ -56,9 +56,6 @@ public class ListaPanel extends JPanel {
         atualizar();
     }
 
-    /**
-     * Recarrega a tabela aplicando o critério de ordenação selecionado.
-     */
     public void atualizar() {
         SerieComparators.Criterio criterio =
                 (SerieComparators.Criterio) comboOrdenacao.getSelectedItem();

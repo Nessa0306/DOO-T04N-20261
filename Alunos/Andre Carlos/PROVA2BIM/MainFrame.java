@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
         setSize(1000, 620);
         setLocationRelativeTo(null);
 
-        // ---- Cabeçalho com nome do usuário ----
+        //Cabeçalho com nome do usuário
         JPanel cabecalho = new JPanel(new BorderLayout());
         cabecalho.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
         JLabel saudacao = new JLabel("Olá, " + nomeOuPadrao() + "! 👋");
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 
         add(cabecalho, BorderLayout.NORTH);
 
-        // ---- Abas ----
+        //Abas
         JTabbedPane abas = new JTabbedPane();
 
         BuscaPanel painelBusca = new BuscaPanel(service);
@@ -44,7 +44,7 @@ public class MainFrame extends JFrame {
         abas.addTab("✅ Já assistidas", painelAssistidas);
         abas.addTab("📌 Desejo assistir", painelDeseja);
 
-        // Sempre que mudar para uma aba de lista, atualiza seu conteúdo.
+        //Sempre que mudar para uma aba de lista, atualiza seu conteúdo.
         abas.addChangeListener(e -> {
             Component sel = abas.getSelectedComponent();
             if (sel instanceof ListaPanel) {
@@ -54,14 +54,14 @@ public class MainFrame extends JFrame {
 
         add(abas, BorderLayout.CENTER);
 
-        // ---- Rodapé com caminho do arquivo ----
+        //Rodapé com caminho do arquivo
         JLabel rodape = new JLabel("Dados salvos em: " + service.getCaminhoArquivo());
         rodape.setBorder(BorderFactory.createEmptyBorder(4, 12, 6, 12));
         rodape.setFont(rodape.getFont().deriveFont(11f));
         rodape.setForeground(Color.GRAY);
         add(rodape, BorderLayout.SOUTH);
 
-        // ---- Salva ao fechar ----
+        //Salva ao fechar
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

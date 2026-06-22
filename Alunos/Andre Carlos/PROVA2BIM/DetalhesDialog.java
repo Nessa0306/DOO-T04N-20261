@@ -35,7 +35,7 @@ public class DetalhesDialog extends JDialog {
 
         painel.add(info, BorderLayout.CENTER);
 
-        // Resumo
+        //Resumo
         JTextArea resumo = new JTextArea();
         resumo.setEditable(false);
         resumo.setLineWrap(true);

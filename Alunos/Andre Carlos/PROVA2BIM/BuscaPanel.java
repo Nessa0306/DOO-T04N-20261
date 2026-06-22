@@ -16,7 +16,7 @@ public class BuscaPanel extends JPanel {
         setLayout(new BorderLayout(8, 8));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        //Topo: campo de busca
+        //campo de busca
         JPanel topo = new JPanel(new BorderLayout(6, 6));
         campoBusca = new JTextField();
         campoBusca.setToolTipText("Digite o nome da série e pressione Enter");
@@ -27,7 +27,7 @@ public class BuscaPanel extends JPanel {
         topo.add(botaoBuscar, BorderLayout.EAST);
         add(topo, BorderLayout.NORTH);
 
-        //Centro: tabela de resultados
+        //tabela de resultados
         tableModel = new SerieTableModel();
         tabela = new JTable(tableModel);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -35,7 +35,7 @@ public class BuscaPanel extends JPanel {
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         add(new JScrollPane(tabela), BorderLayout.CENTER);
 
-        //Base: ações
+        //ações
         JPanel base = new JPanel(new BorderLayout());
         JPanel acoes = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
