@@ -53,6 +53,23 @@
   "favoritos": [
     {
       "estado": "Ended",
+      "dataEstreia": "2004-09-11",
+      "generos": [
+        "Action",
+        "Adventure",
+        "Science-Fiction"
+      ],
+      "dataTermino": "2008-03-08",
+      "emissora": "The CW",
+      "nome": "The Batman",
+      "idioma": "English",
+      "resumo": "Hidden in the shadows, The Batman casts a protective eye while tracking the thugs, thieves and criminal masterminds that claim Gotham City's dark alleys each night. In one magnificent swoop, he descends up on opponents and battles with a fierceness that seems almost inhuman. This is the young Bruce Wayne who assumes the role of Gotham's greatest defender in a fresh retelling of the Dark Knight's beginnings.With incredible gadgets, awesome animation and a cool new vibe, these 13 exciting episodes from the hit series showcase The Batman taking on your favourite villains \u2013 The Joker, The Penguin, Mr. Freeze, Catwoman, Bane \u2013 and new crazies you'll love to hate!",
+      "id": 481,
+      "nota": 7.7,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/3/9370.jpg"
+    },
+    {
+      "estado": "Ended",
       "dataEstreia": "2008-01-20",
       "generos": [
         "Drama",

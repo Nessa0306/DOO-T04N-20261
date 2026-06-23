@@ -1,19 +1,4 @@
 
-/**
- * Sistema de Acompanhamento de Séries de TV
- * Trabalho individual para a disciplina de Desenvolvimento Orientado a Objetos
- *
- * Requisitos:
- * - OOP: Boas práticas de programação orientada a objeto
- * - UI: Interface com Java Swing
- * - Exceções: Tratamento de exceções robusto
- * - Persistência: Dados em JSON
- * - Usuário: Nome/apelido
- * - Busca: Buscar séries por nome
- * - Listas: Favoritos, Já Assistidas, Desejo Assistir
- * - Ordenação: Alfabética, Nota, Estado, Data de Estreia
- * - Informações: Nome, Idioma, Gêneros, Nota, Estado, Datas, Emissora
- */
 public class Main {
 
     public static void main(String[] args) {
