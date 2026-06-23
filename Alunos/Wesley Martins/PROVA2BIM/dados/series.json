@@ -1,0 +1,152 @@
+{
+  "desejamAssistir": [
+    {
+      "estado": "Ended",
+      "dataEstreia": "1994-09-22",
+      "generos": [
+        "Comedy",
+        "Romance"
+      ],
+      "dataTermino": "2004-05-06",
+      "emissora": "NBC",
+      "nome": "Friends",
+      "idioma": "English",
+      "resumo": "Follows the personal and professional lives of six New York City friends.",
+      "id": 4952,
+      "nota": 8.9,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/39/99489.jpg"
+    },
+    {
+      "estado": "Running",
+      "dataEstreia": "2019-12-20",
+      "generos": [
+        "Action",
+        "Adventure",
+        "Drama",
+        "Fantasy"
+      ],
+      "emissora": "Netflix",
+      "nome": "The Witcher",
+      "idioma": "English",
+      "resumo": "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+      "id": 40008,
+      "nota": 8,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/4/10687.jpg"
+    },
+    {
+      "estado": "Ended",
+      "dataEstreia": "2016-09-19",
+      "generos": [
+        "Comedy",
+        "Fantasy"
+      ],
+      "dataTermino": "2020-01-30",
+      "emissora": "NBC",
+      "nome": "The Good Place",
+      "idioma": "English",
+      "resumo": "Four people and their newly deceased on a forked road.",
+      "id": 47833,
+      "nota": 8.8,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/3/8778.jpg"
+    }
+  ],
+  "favoritos": [
+    {
+      "estado": "Ended",
+      "dataEstreia": "2008-01-20",
+      "generos": [
+        "Drama",
+        "Crime",
+        "Thriller"
+      ],
+      "dataTermino": "2013-09-29",
+      "emissora": "AMC",
+      "nome": "Breaking Bad",
+      "idioma": "English",
+      "resumo": "When an unassuming high school chemistry teacher discovers he is dying of lung cancer, he decides to turn to a life of crime to assure his family's financial security.",
+      "id": 1396,
+      "nota": 9.5,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/0/1.jpg"
+    },
+    {
+      "estado": "Ended",
+      "dataEstreia": "2011-04-17",
+      "generos": [
+        "Drama",
+        "Adventure",
+        "Fantasy"
+      ],
+      "dataTermino": "2019-05-19",
+      "emissora": "HBO",
+      "nome": "Game of Thrones",
+      "idioma": "English",
+      "resumo": "Nine noble families fight for control over the lands of Westeros, while an ancient enemy emerges from the far North.",
+      "id": 1399,
+      "nota": 9.3,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/3/8711.jpg"
+    },
+    {
+      "estado": "Ended",
+      "dataEstreia": "2005-03-24",
+      "generos": ["Comedy"],
+      "dataTermino": "2013-05-16",
+      "emissora": "NBC",
+      "nome": "The Office",
+      "idioma": "English",
+      "resumo": "The everyday happenings of the workers at the Wernham Hogg paper company.",
+      "id": 6091,
+      "nota": 9,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg"
+    }
+  ],
+  "jaAssistidas": [
+    {
+      "estado": "Ended",
+      "dataEstreia": "2016-11-04",
+      "generos": [
+        "Drama",
+        "History"
+      ],
+      "dataTermino": "2023-12-14",
+      "emissora": "Netflix",
+      "nome": "The Crown",
+      "idioma": "English",
+      "resumo": "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped Britain for decades to come.",
+      "id": 44180,
+      "nota": 8.6,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/10/26156.jpg"
+    },
+    {
+      "estado": "Running",
+      "dataEstreia": "2019-11-12",
+      "generos": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "emissora": "Disney+",
+      "nome": "The Mandalorian",
+      "idioma": "English",
+      "resumo": "After the stories of Jango and Boba Fett, another warrior emerges in the Star Wars universe. The Mandalorian is set after the fall of the Empire and before the emergence of the First Order.",
+      "id": 45317,
+      "nota": 8.7,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/6/16706.jpg"
+    },
+    {
+      "estado": "Running",
+      "dataEstreia": "2016-07-15",
+      "generos": [
+        "Drama",
+        "Fantasy",
+        "Horror"
+      ],
+      "emissora": "Netflix",
+      "nome": "Stranger Things",
+      "idioma": "English",
+      "resumo": "When a young boy disappears, his friends, family and local police go on a search to find him, only to discover a secret government project and a strange new world.",
+      "id": 42009,
+      "nota": 8.7,
+      "imagemUrl": "https://static.tvmaze.com/uploads/images/original_untouched/0/145.jpg"
+    }
+  ]
+}

@@ -66,9 +66,9 @@ public class WeatherApp extends JFrame implements ActionListener {
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         titleLabel = new JLabel("Informe uma cidade e clique em Buscar Clima.", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 20 ));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(8, 0, 8, 0));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(16, 0, 16, 0));
 
         detailsLabel = new JLabel(" ");
         detailsLabel.setFont(new Font("Consolas", Font.PLAIN, 14));
@@ -135,7 +135,7 @@ public class WeatherApp extends JFrame implements ActionListener {
 
     private String formatWeather(WeatherInfo info) {
         return "Local: " + info.getLocation() + "\n" +
-            "Temperatura atual: " + formatNumber(info.getTemperature()) + " °C\n" +
+            "\nTemperatura atual: " + formatNumber(info.getTemperature()) + " °C\n" +
             "Máxima do dia: " + formatNumber(info.getTempMax()) + " °C\n" +
             "Mínima do dia: " + formatNumber(info.getTempMin()) + " °C\n" +
             "Umidade: " + formatNumber(info.getHumidity()) + " %\n" +

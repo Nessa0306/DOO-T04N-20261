@@ -1,0 +1,26 @@
+# Compiled Java classes
+*.class
+
+# Package files
+*.jar
+
+# Build directories
+build/
+out/
+
+# IDE files
+*.iml
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*~
+
+# Node modules (if any accidental JS tooling)
+node_modules/
