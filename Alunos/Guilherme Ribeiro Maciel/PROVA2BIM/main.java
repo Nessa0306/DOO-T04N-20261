@@ -12,31 +12,16 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.Builder;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,17 +33,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
-import java.util.List;
 
 public class main {
 
@@ -200,65 +180,19 @@ public class main {
 			});
 			
 			fav.addActionListener(e -> {
-				int linhaSelecionada = tabela.getSelectedRow();
-				
-				System.out.println(linhaSelecionada);
-				
-				if (linhaSelecionada != -1) {
-					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
-					
-					Long id = (Long) modelo.getValueAt(serieDados, 0);
-					
-					SalvarSerie(id, 1);
-				}
+				addRemove(tabela, modelo, 1);
 			});
 			
 			assistidas.addActionListener(e -> {
-				int linhaSelecionada = tabela.getSelectedRow();
-				
-				if (linhaSelecionada != -1) {
-					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
-					
-					Long id = (Long) modelo.getValueAt(serieDados, 0);
-					
-					SalvarSerie(id, 2);
-				}
+				addRemove(tabela, modelo, 2);
 			});
 			
 			witchlist.addActionListener(e -> {
-				int linhaSelecionada = tabela.getSelectedRow();
-				
-				if (linhaSelecionada != -1) {
-					int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
-					
-					Long id = (Long) modelo.getValueAt(serieDados, 0);
-					
-					SalvarSerie(id, 3);
-				}
+				addRemove(tabela, modelo, 3);
 			});
 			
 			del.addActionListener(e -> {
-				int linhaSelecionada = tabela1.getSelectedRow();
-				
-				System.out.println(linhaSelecionada);
-				
-				if (linhaSelecionada >= 0) { 
-				        int serieDados = tabela1.convertRowIndexToModel(linhaSelecionada);
-				        
-				        Object valorId = modelo1.getValueAt(serieDados, 0);
-				        Long id = Long.valueOf(valorId.toString());
-				        
-				        if (jsonArquivo != null && jsonArquivo.getSeries() != null) {
-				            jsonArquivo.getSeries().removeIf(serie -> serie.getId().equals(id));
-				            salvarArquivo(); 
-				        }
-				        
-				        modelo1.removeRow(linhaSelecionada);
-				        
-				        System.out.println("ID removido: " + id);
-				    } else {
-				        System.out.println("Nenhuma linha foi selecionada na tabela.");
-				    }
+				addRemove(tabela1, modelo1, 0);
 			});
 			
 			pesquisar.addActionListener(new ActionListener() {
@@ -273,21 +207,7 @@ public class main {
 				public void actionPerformed(ActionEvent e) {
 					modelo1.setRowCount(0);
 					
-					for(int i = 0; i < jsonArquivo.getSeries().size(); i++) {
-						if (jsonArquivo.getSeries().get(i).getLista() == 1) {
-							modelo1.addRow(new Object[] {
-									jsonArquivo.getSeries().get(i).getId(),
-									jsonArquivo.getSeries().get(i).getName(),
-									jsonArquivo.getSeries().get(i).getLanguage(),
-									jsonArquivo.getSeries().get(i).Generos(),
-									jsonArquivo.getSeries().get(i).getRating().getAverage(),
-									jsonArquivo.getSeries().get(i).getStatus(),
-									jsonArquivo.getSeries().get(i).getPremiered(),
-									jsonArquivo.getSeries().get(i).getEnded(),
-									jsonArquivo.getSeries().get(i).Emissora(),
-							});
-						}
-					}
+					popularTabela(modelo1, 1);
 					
 					cardControl.show(telas, "Listas");
 					//puxar a lista de series salvas como 1-favoritas
@@ -299,21 +219,7 @@ public class main {
 				public void actionPerformed(ActionEvent e) {
 					modelo1.setRowCount(0);
 					
-					for(int i = 0; i < jsonArquivo.getSeries().size(); i++) {
-						if (jsonArquivo.getSeries().get(i).getLista() == 2) {
-							modelo1.addRow(new Object[] {
-									jsonArquivo.getSeries().get(i).getId(),
-									jsonArquivo.getSeries().get(i).getName(),
-									jsonArquivo.getSeries().get(i).getLanguage(),
-									jsonArquivo.getSeries().get(i).Generos(),
-									jsonArquivo.getSeries().get(i).getRating().getAverage(),
-									jsonArquivo.getSeries().get(i).getStatus(),
-									jsonArquivo.getSeries().get(i).getPremiered(),
-									jsonArquivo.getSeries().get(i).getEnded(),
-									jsonArquivo.getSeries().get(i).Emissora(),
-							});
-						}
-					}
+					popularTabela(modelo1, 2);
 					
 					cardControl.show(telas, "Listas");
 					//puxar a lista de series salvas como 2-series assistidas
@@ -325,21 +231,7 @@ public class main {
 				public void actionPerformed(ActionEvent e) {
 					modelo1.setRowCount(0);
 					
-					for(int i = 0; i < jsonArquivo.getSeries().size(); i++) {
-						if (jsonArquivo.getSeries().get(i).getLista() == 3) {
-							modelo1.addRow(new Object[] {
-									jsonArquivo.getSeries().get(i).getId(),
-									jsonArquivo.getSeries().get(i).getName(),
-									jsonArquivo.getSeries().get(i).getLanguage(),
-									jsonArquivo.getSeries().get(i).Generos(),
-									jsonArquivo.getSeries().get(i).getRating().getAverage(),
-									jsonArquivo.getSeries().get(i).getStatus(),
-									jsonArquivo.getSeries().get(i).getPremiered(),
-									jsonArquivo.getSeries().get(i).getEnded(),
-									jsonArquivo.getSeries().get(i).Emissora(),
-							});
-						}
-					}
+					popularTabela(modelo1, 3);
 					cardControl.show(telas, "Listas");
 					//puxar a lista de series salvas como 3-pretendo assistir
 				}
@@ -367,12 +259,55 @@ public class main {
 					}
 					
 					cardControl.show(telas, "Resultado");
-					
-					telas.revalidate();
-			        telas.repaint();
 				}
 			});
 		});
+	}
+	
+	private static void addRemove(JTable tabela, DefaultTableModel modelo, int reason) {
+		int linhaSelecionada = tabela.getSelectedRow();
+		
+		if (linhaSelecionada >= 0) { 
+		     	int serieDados = tabela.convertRowIndexToModel(linhaSelecionada);
+		        
+		        Object valorId = modelo.getValueAt(serieDados, 0);
+		        Long id = Long.valueOf(valorId.toString());
+		        
+		        switch(reason) {
+		        case 0:
+			        jsonArquivo.getSeries().removeIf(serie -> serie.getId().equals(id));
+			        modelo.removeRow(linhaSelecionada);
+		        	break;
+		        case 1:
+		        	SalvarSerie(id, reason);
+		        	break;
+		        case 2:
+		        	SalvarSerie(id, reason);
+		        	break;
+		        case 3:
+		        	SalvarSerie(id, reason);
+		        	break;
+		        }
+				salvarArquivo(); 
+		}
+	}
+	
+	private static void popularTabela(DefaultTableModel modelo, int lista){
+		for(int i = 0; i < jsonArquivo.getSeries().size(); i++) {
+			if (jsonArquivo.getSeries().get(i).getLista() == lista) {
+				modelo.addRow(new Object[] {
+						jsonArquivo.getSeries().get(i).getId(),
+						jsonArquivo.getSeries().get(i).getName(),
+						jsonArquivo.getSeries().get(i).getLanguage(),
+						jsonArquivo.getSeries().get(i).Generos(),
+						jsonArquivo.getSeries().get(i).getRating().getAverage(),
+						jsonArquivo.getSeries().get(i).getStatus(),
+						jsonArquivo.getSeries().get(i).getPremiered(),
+						jsonArquivo.getSeries().get(i).getEnded(),
+						jsonArquivo.getSeries().get(i).Emissora(),
+				});
+			}
+		}
 	}
 	
 	private static void ConsultaSeries(String serie) {
@@ -383,30 +318,10 @@ public class main {
 			mapper.registerModule(new JavaTimeModule());
 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		
-			HttpClient client = HttpClient.newHttpClient();
-			
-			String params = URLEncoder.encode(serie);
-			URI url = new URI("https://api.tvmaze.com/search/shows?q=" + params);
-		
-			HttpRequest request = HttpRequest.newBuilder(url)
-					.GET()
-					.build();
-			
-			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-			
-			if(response.statusCode() == 200) {
-				System.out.println(response.body());
-				String json = response.body();
-				//por estarmos recebendo uma array de shows precisamos que a desserialização ocorra dentro de uma array tambem
-				series = mapper.readValue(json, Series[].class);
-				/*
-				for(int i = 0; i < series.length; i++) {
-					System.out.println(series[i].resumo());
-				}
-				*/
-			}
-		} catch (URISyntaxException | IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
+			String json = consultaApi(serie, 0);
+			//por estarmos recebendo uma array de shows precisamos que a desserialização ocorra dentro de uma array tambem
+			series = mapper.readValue(json, Series[].class);
+		} catch (IOException e) {
 			ErrorMessage(e.getMessage());
 		}
 	}
@@ -419,9 +334,38 @@ public class main {
 			mapper.registerModule(new JavaTimeModule());
 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 			
+			String json = consultaApi(serie.toString(), 1);
+			//como estamos recebendo apenas o show em si podemos desserializa-lo diretamente no objeto Show
+			Show serie1 = mapper.readValue(json, Show.class);
+			serie1.setLista(lista);
+				
+			boolean jaExiste = jsonArquivo.getSeries().stream()
+			        .anyMatch(s -> s.getId().equals(serie1.getId()));
+				
+			if(jaExiste) {
+				ErrorMessage("essa serie ja foi salva nessa lista");
+			} else {
+				jsonArquivo.setSeries1(serie1);
+			}
+		} catch (IOException e) {
+			ErrorMessage(e.getMessage());
+		}
+	}
+	
+	private static String consultaApi(String serie, int reason){
+		try {
 			HttpClient client = HttpClient.newHttpClient();
 			
-			URI url = new URI("https://api.tvmaze.com/shows/" + serie);
+			URI url = null;
+			
+			switch(reason) {
+			case 0:
+				String params = URLEncoder.encode(serie);
+				url = new URI("https://api.tvmaze.com/search/shows?q=" + params);
+				break;
+			case 1:
+				url = new URI("https://api.tvmaze.com/shows/" + serie);
+			}
 			
 			HttpRequest request = HttpRequest.newBuilder(url)
 					.GET()
@@ -430,24 +374,14 @@ public class main {
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 			
 			if(response.statusCode() == 200) {
-				String json = response.body();
-				//como estamos recebendo apenas o show em si podemos desserializa-lo diretamente no objeto Show
-				Show serie1 = mapper.readValue(json, Show.class);
-				serie1.setLista(lista);
-				
-				boolean jaExiste = jsonArquivo.getSeries().stream()
-				        .anyMatch(s -> s.getId().equals(serie1.getId()));
-				
-				if(jaExiste) {
-					ErrorMessage("essa serie ja foi salva nessa lista");
-				} else {
-					jsonArquivo.setSeries1(serie1);
-					salvarArquivo();
-				}
+				return response.body();
+			} else {
+				ErrorMessage("Não foi possivel fazer a consulta da serie");
+				return null;
 			}
 		} catch (URISyntaxException | IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
 			ErrorMessage(e.getMessage());
+			return null;
 		}
 	}
 	
@@ -461,16 +395,13 @@ public class main {
 		try {
 			jsonArchive = mapper.writeValueAsString(jsonArquivo);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			ErrorMessage(e.getMessage());
 		}
 		try {
 			Files.writeString(caminhoArquivo, jsonArchive);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			ErrorMessage(e.getMessage());
 		}
-		System.out.println("arquivo salvo");
 	}
 
 	private static void TelaIniciar() {
@@ -510,13 +441,11 @@ public class main {
 		mapper.registerModule(new JavaTimeModule());
 		try (FileReader reader = new FileReader(caminho + arquivo)) {
 			jsonArquivo = mapper.readValue(reader, Arquivo.class);
-			System.out.println(jsonArquivo.resumo());
 			return jsonArquivo;
 		} catch (FileNotFoundException e) {
 			ErrorMessage("Arquivo Json não encontrado, iniciando um novo...");
 			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			ErrorMessage(e.getMessage());
 			return null;
 		}
