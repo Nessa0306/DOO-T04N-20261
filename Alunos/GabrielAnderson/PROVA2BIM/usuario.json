@@ -1,0 +1,167 @@
+{
+  "nome": "Gabriel",
+  "favoritos": [
+    {
+      "id": 169,
+      "name": "Breaking Bad",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "Crime",
+        "Thriller"
+      ],
+      "rating": {
+        "average": 9.2
+      },
+      "status": "Ended",
+      "premiered": "2008-01-20",
+      "ended": "2013-09-29",
+      "network": {
+        "name": "AMC"
+      },
+      "summary": ""
+    },
+    {
+      "id": 30770,
+      "name": "Chernobyl",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "History"
+      ],
+      "rating": {
+        "average": 9
+      },
+      "status": "Ended",
+      "premiered": "2019-05-06",
+      "ended": "2019-06-03",
+      "network": {
+        "name": "HBO"
+      },
+      "summary": ""
+    }
+  ],
+  "assistidas": [
+    {
+      "id": 82,
+      "name": "Game of Thrones",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "Adventure",
+        "Fantasy"
+      ],
+      "rating": {
+        "average": 8.9
+      },
+      "status": "Ended",
+      "premiered": "2011-04-17",
+      "ended": "2019-05-19",
+      "network": {
+        "name": "HBO"
+      },
+      "summary": ""
+    },
+    {
+      "id": 431,
+      "name": "Friends",
+      "language": "English",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "rating": {
+        "average": 8.5
+      },
+      "status": "Ended",
+      "premiered": "1994-09-22",
+      "ended": "2004-05-06",
+      "network": {
+        "name": "NBC"
+      },
+      "summary": ""
+    },
+    {
+      "id": 528,
+      "name": "Sherlock",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "Crime",
+        "Mystery"
+      ],
+      "rating": {
+        "average": 8.9
+      },
+      "status": "Ended",
+      "premiered": "2010-07-25",
+      "ended": "2017-01-15",
+      "network": {
+        "name": "BBC One"
+      },
+      "summary": ""
+    }
+  ],
+  "desejaAssistir": [
+    {
+      "id": 2993,
+      "name": "Stranger Things",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "Fantasy",
+        "Horror"
+      ],
+      "rating": {
+        "average": 8.4
+      },
+      "status": "Running",
+      "premiered": "2016-07-15",
+      "ended": null,
+      "network": {
+        "name": "Netflix"
+      },
+      "summary": ""
+    },
+    {
+      "id": 1371,
+      "name": "Dark",
+      "language": "German",
+      "genres": [
+        "Drama",
+        "Science-Fiction",
+        "Thriller"
+      ],
+      "rating": {
+        "average": 8.5
+      },
+      "status": "Ended",
+      "premiered": "2017-12-01",
+      "ended": "2020-06-27",
+      "network": {
+        "name": "Netflix"
+      },
+      "summary": ""
+    },
+    {
+      "id": 19,
+      "name": "Supernatural",
+      "language": "English",
+      "genres": [
+        "Drama",
+        "Action",
+        "Supernatural"
+      ],
+      "rating": {
+        "average": 8.3
+      },
+      "status": "Ended",
+      "premiered": "2005-09-13",
+      "ended": "2020-11-19",
+      "network": {
+        "name": "The CW"
+      },
+      "summary": "This haunting series follows the Winchester brothers as they crisscross the lonely and mysterious back roads of the country in their '67 Chevy Impala, hunting down every evil supernatural force they encounter along the way."
+    }
+  ]
+}
