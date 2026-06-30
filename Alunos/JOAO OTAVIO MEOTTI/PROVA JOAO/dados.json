@@ -1,0 +1,30 @@
+{
+  "nome" : "joao",
+  "favoritos" : [ ],
+  "assistidos" : [ {
+    "id" : 975,
+    "nome" : "Batman",
+    "status" : "Ended",
+    "dataEstreia" : "1966-01-12",
+    "dataFim" : "1968-03-14",
+    "nota" : 7.8,
+    "emissora" : "ABC",
+    "generos" : "Comedy, Action, Adventure",
+    "sumario" : "Wealthy entrepreneur Bruce Wayne and his ward Dick Grayson lead a double life: they are actually crime fighting duo Batman and Robin. A secret Batpole in the Wayne mansion leads to the Batcave, where Police Commissioner Gordon often calls with the latest emergency threatening Gotham City. Racing to the scene of the crime in the Batmobile, Batman and Robin must (with the help of their trusty Bat-utility-belt) thwart the efforts of a variety of master criminals, including Catwoman, Egghead, The Joker, King Tut, The Penguin, and The Riddler.",
+    "idioma" : "English",
+    "imagemUrl" : "https://static.tvmaze.com/uploads/images/original_untouched/6/16463.jpg"
+  }, {
+    "id" : 169,
+    "nome" : "Breaking Bad",
+    "status" : "Ended",
+    "dataEstreia" : "2008-01-20",
+    "dataFim" : "2019-10-11",
+    "nota" : 9.2,
+    "emissora" : "AMC",
+    "generos" : "Drama, Crime, Thriller",
+    "sumario" : "Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live. With a new sense of fearlessness based on his medical prognosis, and a desire to secure his family's financial security, White chooses to enter a dangerous world of drugs and crime and ascends to power in this world. The series explores how a fatal diagnosis such as White's releases a typical man from the daily concerns and constraints of normal society and follows his transformation from mild family man to a kingpin of the drug trade.",
+    "idioma" : "English",
+    "imagemUrl" : "https://static.tvmaze.com/uploads/images/original_untouched/501/1253519.jpg"
+  } ],
+  "queroAssistir" : [ ]
+}
